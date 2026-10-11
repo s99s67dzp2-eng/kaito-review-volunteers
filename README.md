@@ -18,6 +18,8 @@
 
 可選：獨立執行 [公開、純合成 Python 測試](tests/test_public_review_challenges.py)，不需任何帳號、金鑰、安裝套件或交易資料。在本機執行 `python3 -m unittest discover -s tests -v`；[公開 GitHub Actions 測試紀錄](actions/workflows/synthetic-screening.yml) 可查看執行結果。**即使測試全部通過，也只代表合成篩選測試可重現，不代表真實策略獲利或任何正式 Gate 通過。**
 
+**CI 見證志工：** 現在也可做 [案例 E：核對真實 GitHub Actions run / attempt / 來源 SHA / 公開合成工件雜湊](REVIEW_CHALLENGES.md#e--verify-a-real-public-github-actions-run-without-granting-private-access)。這是零金鑰、純公開的獨立來源核對入門；工件內容由工作流程自行產生，**不能當作獨立簽章或私人交易系統驗證**。
+
 ## English call for independent review volunteers
 
 A **private, research-only cryptocurrency quantitative-analysis project** seeks **two genuinely independent technical methodology reviewers** and **a separate GitHub Actions provenance witness**. **No positive expectancy has been validated and no real-money trading is authorized.**
