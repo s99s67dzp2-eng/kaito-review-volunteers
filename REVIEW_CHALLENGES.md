@@ -30,4 +30,4 @@ An applicant provides a green CI badge for **a different commit** from the metho
 
 ## Submitting an answer
 
-Reply to the [volunteer intake issue](../../issues) with a **brief explanation** of one case, role of interest and relevant public technical examples if available. Do not submit secrets, account balances, private datasets, identity documents or credentials. A suggested diagnosis is not an audit attestation, release authorization or certification.
+Reply to the [volunteer intake issue](https://github.com/s99s67dzp2-eng/kaito-review-volunteers/issues/1) with a **brief explanation** of one case, role of interest and relevant public technical examples if available. Do not submit secrets, account balances, private datasets, identity documents or credentials. A suggested diagnosis is not an audit attestation, release authorization or certification.
