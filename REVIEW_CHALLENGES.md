@@ -28,6 +28,20 @@ An applicant provides a green CI badge for **a different commit** from the metho
 
 **Question:** Why should the release remain on HOLD? What would distinguish independent review of an exact immutable source revision from a repeated self-signed claim?
 
+## E — Verify a *real public* GitHub Actions run without granting private access
+
+The public [synthetic-screening workflow](.github/workflows/synthetic-screening.yml) generates a `public-synthetic-ci-witness-practice` artifact containing `witness-practice.json` and `witness-practice.sha256` **only after its fabricated-data tests succeed**. Unlike the entirely invented run IDs in case D, this exercise offers a real GitHub-hosted run and downloadable artifact — but still **no independent Method Freeze approval**.
+
+**Optional witness task (public metadata; GitHub may require sign-in to download the artifact, but never provide exchange secrets):**
+
+1. Select a *completed successful* public [workflow run](https://github.com/s99s67dzp2-eng/kaito-review-volunteers/actions/workflows/synthetic-screening.yml) with this artifact. Record its exact **run ID, attempt number, event, Git commit SHA, job ID and conclusion** from GitHub's own Actions record. Do not rely on a screenshot or badge.
+2. Check GitHub's public workflow job list and actual executed step names. Compare the checked-out Git SHA and source file hashes against the **downloaded** JSON manifest. For a pull-request run, explicitly distinguish the **temporary merge commit** used by the workflow from the PR source-head commit. Do not silently treat them as the same.
+3. Verify the manifest's SHA-256 against `witness-practice.sha256`. If the GitHub REST artifact metadata reports a digest, distinguish the **archive digest** from the **inner JSON file digest**; one is not proof of the other without opening the actual bytes.
+4. Provide one concrete falsifying negative control: a stale run SHA, wrong run attempt, changed source bytes, mismatched archive digest, missing expected job step, or a reviewer/witness operating under the same controller. Explain how it would force **HOLD**.
+5. State why a job-created manifest is **self-reported**, and why the exercise cannot certify real strategy returns, independent people, authentic exchange balances, private production source or deployment approval.
+
+**Public evidence only.** No private repository invitations, personal data, API keys or wallet information. A good answer makes you a *potential* witness volunteer; it never grants access or signs any production attestation.
+
 ## Submitting an answer
 
 Reply to the [volunteer intake issue](https://github.com/s99s67dzp2-eng/kaito-review-volunteers/issues/1) with a **brief explanation** of one case, role of interest and relevant public technical examples if available. Do not submit secrets, account balances, private datasets, identity documents or credentials. A suggested diagnosis is not an audit attestation, release authorization or certification.
