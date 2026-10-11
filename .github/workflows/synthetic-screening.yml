@@ -73,7 +73,7 @@ jobs:
               "instructions": "Independently corroborate this self-reported record against GitHub API source SHA, actual job steps and artifact digest; never treat as external witness approval.",
           }
           Path("public-evidence/witness-practice.json").write_text(
-              json.dumps(envelope, indent=2, sort_keys=True) + "\\n", encoding="utf-8"
+              json.dumps(envelope, indent=2, sort_keys=True) + "\n", encoding="utf-8"
           )
           Path("public-evidence/witness-practice.sha256").write_text(
               digest(Path("public-evidence/witness-practice.json").read_bytes()) +
