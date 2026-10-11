@@ -1,0 +1,34 @@
+name: Public synthetic reviewer-screening tests
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "tests/test_public_review_challenges.py"
+      - ".github/workflows/synthetic-screening.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: public-synthetic-screening
+  cancel-in-progress: true
+
+jobs:
+  fake-data-only:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - name: Checkout only public repository without stored credentials
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Display system Python
+        run: python3 --version
+      - name: Run isolated synthetic falsification examples
+        run: python3 -m unittest discover -s tests -p 'test_public_review_challenges.py' -v
+      - name: Explicit scope warning
+        run: |
+          echo "SYNTHETIC_REVIEW_SCREENING_ONLY"
+          echo "NO_PRIVATE_SOURCE_NO_REAL_CI_ATTESTATION_NO_ALPHA_NO_TRADING_PERMISSION"
