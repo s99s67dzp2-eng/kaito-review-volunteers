@@ -32,7 +32,7 @@ An applicant provides a green CI badge for **a different commit** from the metho
 
 The public [synthetic-screening workflow](.github/workflows/synthetic-screening.yml) generates a `public-synthetic-ci-witness-practice` artifact containing `witness-practice.json` and `witness-practice.sha256` **only after its fabricated-data tests succeed**. Unlike the entirely invented run IDs in case D, this exercise offers a real GitHub-hosted run and downloadable artifact — but still **no independent Method Freeze approval**.
 
-**Optional witness task (public, no sign-in or secrets required for inspection):**
+**Optional witness task (public metadata; GitHub may require sign-in to download the artifact, but never provide exchange secrets):**
 
 1. Select a *completed successful* public [workflow run](https://github.com/s99s67dzp2-eng/kaito-review-volunteers/actions/workflows/synthetic-screening.yml) with this artifact. Record its exact **run ID, attempt number, event, Git commit SHA, job ID and conclusion** from GitHub's own Actions record. Do not rely on a screenshot or badge.
 2. Check GitHub's public workflow job list and actual executed step names. Compare the checked-out Git SHA and source file hashes against the **downloaded** JSON manifest. For a pull-request run, explicitly distinguish the **temporary merge commit** used by the workflow from the PR source-head commit. Do not silently treat them as the same.
