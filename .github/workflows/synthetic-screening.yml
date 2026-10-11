@@ -1,10 +1,18 @@
 name: Public synthetic reviewer-screening tests
 
 on:
+  pull_request:
+    paths:
+      - "tests/test_public_review_challenges.py"
+      - "REVIEW_CHALLENGES.md"
+      - "SECURITY_AND_SCOPE.md"
+      - ".github/workflows/synthetic-screening.yml"
   push:
     branches: [main]
     paths:
       - "tests/test_public_review_challenges.py"
+      - "REVIEW_CHALLENGES.md"
+      - "SECURITY_AND_SCOPE.md"
       - ".github/workflows/synthetic-screening.yml"
   workflow_dispatch:
 
@@ -32,3 +40,54 @@ jobs:
         run: |
           echo "SYNTHETIC_REVIEW_SCREENING_ONLY"
           echo "NO_PRIVATE_SOURCE_NO_REAL_CI_ATTESTATION_NO_ALPHA_NO_TRADING_PERMISSION"
+      - name: Emit synthetic-only exact-SHA witness practice manifest
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p public-evidence
+          python3 - <<'PY'
+          import hashlib
+          import json
+          import os
+          from pathlib import Path
+          paths = [
+              ".github/workflows/synthetic-screening.yml",
+              "REVIEW_CHALLENGES.md",
+              "SECURITY_AND_SCOPE.md",
+              "tests/test_public_review_challenges.py",
+          ]
+          digest = lambda b: hashlib.sha256(b).hexdigest()
+          envelope = {
+              "schema": "KAITO_PUBLIC_SYNTHETIC_CI_WITNESS_PRACTICE_V1",
+              "data_class": "SYNTHETIC_ONLY",
+              "not_an_independent_attestation": True,
+              "real_trading_approval": False,
+              "private_code_released": False,
+              "repository": os.environ["GITHUB_REPOSITORY"],
+              "git_commit_sha": os.environ["GITHUB_SHA"],
+              "workflow": os.environ["GITHUB_WORKFLOW"],
+              "workflow_run_id": int(os.environ["GITHUB_RUN_ID"]),
+              "workflow_run_attempt": int(os.environ["GITHUB_RUN_ATTEMPT"]),
+              "event_name": os.environ["GITHUB_EVENT_NAME"],
+              "source_sha256": {p: digest(Path(p).read_bytes()) for p in paths},
+              "instructions": "Independently corroborate this self-reported record against GitHub API source SHA, actual job steps and artifact digest; never treat as external witness approval.",
+          }
+          Path("public-evidence/witness-practice.json").write_text(
+              json.dumps(envelope, indent=2, sort_keys=True) + "\\n", encoding="utf-8"
+          )
+          Path("public-evidence/witness-practice.sha256").write_text(
+              digest(Path("public-evidence/witness-practice.json").read_bytes()) +
+              "  witness-practice.json\\n", encoding="utf-8"
+          )
+          assert envelope["data_class"] == "SYNTHETIC_ONLY"
+          assert len(envelope["git_commit_sha"]) == 40
+          assert envelope["workflow_run_id"] > 0
+          print("PUBLIC_SYNTHETIC_MANIFEST_GENERATED_NO_INDEPENDENT_CERTIFICATION")
+          PY
+      - name: Upload public synthetic CI provenance practice (NOT method evidence)
+        uses: actions/upload-artifact@v4
+        with:
+          name: public-synthetic-ci-witness-practice
+          path: public-evidence/
+          if-no-files-found: error
+          retention-days: 30
