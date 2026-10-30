@@ -1,0 +1,10 @@
+{
+  "TEST_RESULTS.txt": "48b45f3a2112cb0211e6d3c8799db164a67e5840accfd0fd1e35dac4d436c99a",
+  "README.md": "141a9018e01eb9516dbfabe886f69fc724a457f5b68c52635705775758d6fab5",
+  "tools/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "tools/kaito_bitget_main_ro_worker_atomic_cutover.py": "1b4cf7b7beb0dc03c05864ab45aa3787d2a7823922735b693e2c8ab53b6a8a79",
+  "tools/kaito_bitget_main_ro_diag_host_preflight.py": "c801972725c166aa1a0cbe8d3a5ef7e622d6aa7257e66d3a9da1de74479887f3",
+  "tests/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "tests/test_kaito_bitget_main_ro_diag_host_preflight.py": "ac7bb9ee539ae6c10a61a8f817a7f1abbbd050a0d9d868297dec6eff68ac40c1",
+  "tests/test_kaito_bitget_main_ro_worker_atomic_cutover.py": "89f38cf1fb3fdf51f8d850c17fa9b61a0d466840d51ed5aef00c8bfa7d6beb04"
+}
